@@ -38,17 +38,33 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',               # For API development
+    'rest_framework_simplejwt',
     'users',                        # User management app
     'submissions',                  # Code submission app
     'problems',                     # Problem management app
     'docker_manager',               # Docker isolation logic
+    'drf_yasg',
 ]
+
+AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': 'your_secret_key_here',  # Change this to a secure secret key
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
