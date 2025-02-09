@@ -46,6 +46,14 @@ INSTALLED_APPS = [
     'drf_yasg',
 ]
 
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+STORAGE_URL = "/storage/"
+STORAGE_ROOT = os.path.join(BASE_DIR, "storage")
+
 AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
